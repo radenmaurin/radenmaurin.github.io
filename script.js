@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
      ====================================================================== */
   const typedEl = $('#typed-text');
   const typingStrings = [
-    'PMO & Project Control Specialist',
-    'Tender & Procurement Specialist',
-    'Oil & Gas Compliance Professional',
+    'Data Analyst',
     'Project Management Professional',
+    'Business Operations Analyst',
+    'PMO & Reporting Specialist',
   ];
 
   if (typedEl) {
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       projectCards.forEach((card) => {
         const category = card.getAttribute('data-category');
-        const shouldShow = filter === 'all' || category === filter;
+        const shouldShow = filter === 'all' || (category || '').split(/\s+/).includes(filter);
 
         if (shouldShow) {
           card.style.display = '';
@@ -322,6 +322,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalChallenge = $('#modal-challenge');
   const modalSolution = $('#modal-solution');
   const modalResult = $('#modal-result');
+  const modalMedia = $('#modal-media');
+  const modalProjectImage = $('#modal-project-image');
+  const modalPresentationLink = $('#modal-presentation-link');
+  const modalDemoLink = $('#modal-demo-link');
+  const modalGithubLink = $('#modal-github-link');
+  const modalProjectCertLink = $('#modal-project-cert-link');
+
+  const setProjectLink = (el, url) => {
+    if (!el) return;
+    if (url && url.trim()) {
+      el.href = url;
+      el.style.display = 'inline-flex';
+    } else {
+      el.removeAttribute('href');
+      el.style.display = 'none';
+    }
+  };
 
   function openModal(card) {
     if (!modal) return;
@@ -334,19 +351,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalSolution) modalSolution.textContent = card.getAttribute('data-solution') || '';
     if (modalResult) modalResult.textContent = card.getAttribute('data-result') || '';
 
-    // Optional: completion certificate button
-    const certSection = $('#modal-cert-section');
-    const certBtn = $('#modal-cert-btn');
-    const certPath = card.getAttribute('data-certificate');
-    if (certSection && certBtn) {
-      if (certPath) {
-        certBtn.setAttribute('data-certificate', certPath);
-        certBtn.setAttribute('data-certificate-title', card.getAttribute('data-title') || 'Certificate');
-        certSection.style.display = '';
+    const projectImage = card.getAttribute('data-image') || '';
+    if (modalMedia && modalProjectImage) {
+      if (projectImage) {
+        modalProjectImage.src = projectImage;
+        modalProjectImage.alt = `${card.getAttribute('data-title') || 'Project'} preview`;
+        modalMedia.style.display = '';
       } else {
-        certSection.style.display = 'none';
+        modalProjectImage.removeAttribute('src');
+        modalMedia.style.display = 'none';
       }
     }
+    setProjectLink(modalPresentationLink, card.getAttribute('data-presentation') || '');
+    setProjectLink(modalDemoLink, card.getAttribute('data-demo') || '');
+    setProjectLink(modalGithubLink, card.getAttribute('data-github') || '');
+    setProjectLink(modalProjectCertLink, card.getAttribute('data-certificate') || '');
 
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -378,73 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close on Escape key (skip if the certificate lightbox is on top — it has its own handler)
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !$('#cert-lightbox')?.classList.contains('active')) {
+    if (e.key === 'Escape') {
       closeModal();
-    }
-  });
-
-  /* ======================================================================
-     11b. CERTIFICATE LIGHTBOX
-     ====================================================================== */
-  const certLightbox = $('#cert-lightbox');
-  const certLightboxImg = $('#cert-lightbox-img');
-  const certLightboxCaption = $('#cert-lightbox-caption');
-  const certLightboxClose = $('#cert-lightbox-close');
-
-  function openCertLightbox(src, caption) {
-    if (!certLightbox || !certLightboxImg) return;
-
-    // Preload first so a missing file shows a friendly toast, not a broken image
-    const probe = new Image();
-    probe.onload = () => {
-      certLightboxImg.src = src;
-      if (certLightboxCaption) certLightboxCaption.textContent = caption || '';
-      certLightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    };
-    probe.onerror = () => {
-      showToast('Certificate file not found yet — add it to the assets/certificates folder.', 'error');
-    };
-    probe.src = src;
-  }
-
-  function closeCertLightbox() {
-    if (!certLightbox) return;
-    certLightbox.classList.remove('active');
-    // Only restore scroll if the project modal isn't open underneath
-    if (!modal || !modal.classList.contains('active')) {
-      document.body.style.overflow = '';
-    }
-    if (certLightboxImg) certLightboxImg.src = '';
-  }
-
-  // Delegate clicks from any .cert-view-btn (cert cards + project modal button)
-  document.addEventListener('click', (e) => {
-    const viewBtn = e.target.closest('.cert-view-btn');
-    if (!viewBtn) return;
-    const src = viewBtn.getAttribute('data-certificate');
-    if (!src) return;
-
-    // Caption: explicit attribute, or the title of the surrounding cert card
-    let caption = viewBtn.getAttribute('data-certificate-title');
-    if (!caption) {
-      const card = viewBtn.closest('.cert-card');
-      caption = card ? ($('.cert-title', card)?.textContent || '') : '';
-    }
-    openCertLightbox(src, caption);
-  });
-
-  if (certLightboxClose) certLightboxClose.addEventListener('click', closeCertLightbox);
-
-  if (certLightbox) {
-    certLightbox.addEventListener('click', (e) => {
-      if (e.target === certLightbox) closeCertLightbox();
-    });
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && certLightbox?.classList.contains('active')) {
-      closeCertLightbox();
     }
   });
 
@@ -545,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Static site (no backend) — hand off to the visitor's own email client
       // with everything pre-filled, rather than pretending to submit a form.
       const mailBody = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-      const mailtoUrl = `mailto:radenmaurin@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+      const mailtoUrl = `mailto:nedmaurin@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
 
       showToast('Opening your email app to send this message...');
       window.location.href = mailtoUrl;

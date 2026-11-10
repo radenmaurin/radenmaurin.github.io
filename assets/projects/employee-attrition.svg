@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10233f"/><stop offset=".64" stop-color="#123e61"/><stop offset="1" stop-color="#635bdf"/></linearGradient><linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".17"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
+<rect width="1200" height="675" fill="url(#bg)"/>
+<circle cx="1090" cy="110" r="240" fill="white" opacity=".045"/><circle cx="1060" cy="660" r="300" fill="white" opacity=".045"/>
+<path d="M888 126 L1135 126 L1135 502 L888 502 Z" fill="none" stroke="white" stroke-opacity=".18" stroke-width="2"/>
+<line x1="888" y1="220" x2="1135" y2="220" stroke="white" stroke-opacity=".12"/><line x1="888" y1="314" x2="1135" y2="314" stroke="white" stroke-opacity=".12"/><line x1="888" y1="408" x2="1135" y2="408" stroke="white" stroke-opacity=".12"/>
+<rect x="920" y="350" width="30" height="120" rx="6" fill="white" opacity=".22"/><rect x="973" y="302" width="30" height="168" rx="6" fill="white" opacity=".32"/><rect x="1026" y="243" width="30" height="227" rx="6" fill="white" opacity=".44"/><rect x="1079" y="191" width="30" height="279" rx="6" fill="white" opacity=".64"/>
+<rect x="78" y="75" width="425" height="50" rx="25" fill="white" opacity=".13"/>
+<text x="104" y="108" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="white" letter-spacing="2">DATA ANALYSIS</text>
+<text x="84" y="271" font-family="Inter,Arial,sans-serif" font-size="59" font-weight="800" fill="white">Employee Attrition</text>
+<text x="84" y="348" font-family="Inter,Arial,sans-serif" font-size="59" font-weight="800" fill="white">Analysis</text>
+<text x="86" y="443" font-family="Inter,Arial,sans-serif" font-size="27" fill="#dce9f7">Exploring workforce trends and insights</text>
+<line x1="85" y1="495" x2="803" y2="495" stroke="white" stroke-opacity=".25"/>
+<text x="86" y="548" font-family="Inter,Arial,sans-serif" font-size="23" fill="white" opacity=".85">Data cleaning  /  EDA  /  Reporting</text>
+<text x="86" y="621" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="white" opacity=".63" letter-spacing="2">RADEN MAURIN  ·  PROJECT PORTFOLIO</text>
+</svg>
