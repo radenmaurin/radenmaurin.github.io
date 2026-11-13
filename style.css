@@ -1308,6 +1308,29 @@ input, textarea, select { font-family: inherit; font-size: inherit; outline: non
   border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
+/* Completed graduation credential */
+.education-card-badge.completed {
+  background: rgba(16, 185, 129, 0.10);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.education-year strong { color: var(--text); font-weight: 700; }
+
+/* Public project stories deliberately exclude confidential client source material. */
+.project-privacy-note {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  max-width: 860px;
+  margin: 30px auto 0;
+  color: var(--text-secondary);
+  font-size: .84rem;
+  line-height: 1.65;
+  text-align: center;
+  justify-content: center;
+}
+.project-privacy-note svg { flex: 0 0 16px; width: 16px; height: 16px; color: var(--accent); margin-top: 4px; }
+
 .education-degree {
   font-size: 1.2rem;
   font-weight: 700;
